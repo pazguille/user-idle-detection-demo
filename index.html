@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>Pequeña demo de la API User Idle Detection</title>
+  </head>
+  <body>
+    <script>
+      const log = (msg) => document.write(`<div>${msg}</div>`) ;
+
+      async function boot() {
+        if (!window.IdleDetector) {
+          log('IdleDetector no está soportado :(');
+          return;
+        }
+
+        log('IdleDetector disponible! Vamo a jugar al bosque!');
+
+        try {
+          // El mínimo son 60 segundos
+          let idleDetector = new IdleDetector({ threshold: 60 });
+          idleDetector.addEventListener('change', e => {
+            const { user, screen } = idleDetector.state;
+            log(`${new Date().toLocaleTimeString()} - El usuario está ${user}, y la pantalla ${screen}`);
+          });
+          await idleDetector.start();
+        } catch (err) {
+          // Puede haber algunos errores por permisos, por lo que leí, aunque no lo pude reproducir.
+          log(`🤖 Peligro Peligro 🤖: ${err}.`);
+        }
+      };
+
+      boot();
+    </script>
+  </body>
+</html>
