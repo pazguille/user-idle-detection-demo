@@ -23,7 +23,7 @@
           let idleDetector = new IdleDetector({ threshold: 60 });
           idleDetector.addEventListener('change', e => {
             const { user, screen } = idleDetector.state;
-            log(`${new Date().toLocaleTimeString()} - El usuario está ${user}, y la pantalla ${screen}`);
+            log(`${new Date().toLocaleTimeString()} - El usuario está ${user} y la pantalla ${screen}`);
           });
           await idleDetector.start();
         } catch (err) {
