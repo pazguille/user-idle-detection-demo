@@ -8,7 +8,7 @@
   </head>
   <body>
     <script>
-      const log = (msg) => document.write(`<div>${msg}</div>`) ;
+      const log = (msg) => document.body.insertAdjacentHTML('beforeend', `<div>${msg}</div>`);
 
       async function boot() {
         if (!window.IdleDetector) {
